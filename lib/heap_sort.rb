@@ -11,11 +11,9 @@ def heapsort(list)
   list.each do |element|
     heap.add(element)
   end
-
-  #then sort it out
   
   i = 0
-  
+
   while i < list.length
     node = heap.remove_min
     list[i] = node
