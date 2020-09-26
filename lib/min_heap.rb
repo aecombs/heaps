@@ -46,10 +46,9 @@ class MinHeap
       if min_index != 0
         swap(min_index, @store.length - 1) if min_index != 0
 
-      # swap(min_index, @store.length - 1) if min_index == 0
         removed_node = @store.pop
 
-        heap_down(0)
+        heap_down(min_index)
 
         return removed_node.value
       else
