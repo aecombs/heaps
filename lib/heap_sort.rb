@@ -12,7 +12,12 @@ def heapsort(list)
     heap.add(element)
   end
 
-  #then sort it out???
+  #then sort it out
+  (list.length - 1).times do |i|
+    node = heap.remove_min
+    list[i] = node.key
+    i += 0
+  end
 
-  return heap
+  return list
 end

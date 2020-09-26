@@ -1,3 +1,5 @@
+require 'pry'
+
 class HeapNode
   attr_reader :key, :value
 
@@ -8,7 +10,6 @@ class HeapNode
 end
 
 class MinHeap
-
   def initialize
     @store = []
   end
@@ -27,7 +28,7 @@ class MinHeap
   #   maintaining the heap structure
   # Time Complexity: O(log n)
   # Space Complexity: O(1)
-  def remove()
+  def remove
     unless self.empty?
       swap(0, @store.length - 1)
       removed_node = @store.pop
@@ -38,6 +39,36 @@ class MinHeap
     end
   end
 
+  def remove_min
+    unless self.empty?
+      min_index = find_min_index
+      
+      swap(0, min_index) unless min_index == 0
+      swap(min_index, @store.length - 1) if min_index == 0
+      removed_node = @store.pop
+
+      heap_down(0)
+
+      return removed_node
+    end
+  end
+
+  def find_min_index
+    min_key = @store.first.key
+    min_index = 0
+
+    i = 0
+    while i < @store.length
+      if @store[i].key < min_key
+        min_key = @store[i].key
+        min_index = i
+      end
+
+      i += 1
+    end
+
+    return min_index
+  end
 
   # Used for Testing
   def to_s
