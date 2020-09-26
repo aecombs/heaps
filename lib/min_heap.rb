@@ -14,18 +14,28 @@ class MinHeap
   end
 
   # This method adds a HeapNode instance to the heap
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(log n)
+  # Space Complexity: O(1)
   def add(key, value = key)
-    raise NotImplementedError, "Method not implemented yet..."
+    new_node = HeapNode.new(key, value)
+    @store << new_node
+
+    heap_up(@store.length - 1) unless self.empty?
   end
 
   # This method removes and returns an element from the heap
   #   maintaining the heap structure
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: O(log n)
+  # Space Complexity: O(1)
   def remove()
-    raise NotImplementedError, "Method not implemented yet..."
+    unless self.empty?
+      temp = @store.first
+      @store[0] = @store.last
+      @store[-1] = temp
+      @store.pop
+
+      heap_down(0)
+    end
   end
 
 
@@ -44,10 +54,11 @@ class MinHeap
   end
 
   # This method returns true if the heap is empty
-  # Time complexity: ?
-  # Space complexity: ?
+  # Time complexity: O(1)
+  # Space complexity: O(1)
   def empty?
-    raise NotImplementedError, "Method not implemented yet..."
+    return true if @store.first.nil?
+    false
   end
 
   private
