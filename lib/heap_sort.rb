@@ -15,7 +15,7 @@ def heapsort(list)
   #then sort it out
   (list.length - 1).times do |i|
     node = heap.remove_min
-    list[i] = node.key
+    list[i] = node
     i += 0
   end
 

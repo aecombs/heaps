@@ -43,13 +43,18 @@ class MinHeap
     unless self.empty?
       min_index = find_min_index
       
-      swap(0, min_index) unless min_index == 0
-      swap(min_index, @store.length - 1) if min_index == 0
-      removed_node = @store.pop
+      if min_index != 0
+        swap(min_index, @store.length - 1) if min_index != 0
 
-      heap_down(0)
+      # swap(min_index, @store.length - 1) if min_index == 0
+        removed_node = @store.pop
 
-      return removed_node
+        heap_down(0)
+
+        return removed_node.value
+      else
+        self.remove
+      end
     end
   end
 
@@ -76,10 +81,10 @@ class MinHeap
 
     output = "["
     (@store.length - 1).times do |index|
-      output += @store[index].value + ", "
+      output += @store[index].value.to_s + ", "
     end
 
-    output += @store.last.value + "]"
+    output += @store.last.value.to_s + "]"
       
     return output
   end
