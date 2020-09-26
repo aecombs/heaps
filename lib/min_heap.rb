@@ -29,12 +29,12 @@ class MinHeap
   # Space Complexity: O(1)
   def remove()
     unless self.empty?
-      temp = @store.first
-      @store[0] = @store.last
-      @store[-1] = temp
-      @store.pop
+      swap(0, @store.length - 1)
+      removed_node = @store.pop
 
       heap_down(0)
+
+      return removed_node.value
     end
   end
 
@@ -66,17 +66,33 @@ class MinHeap
   # This helper method takes an index and
   #  moves it up the heap, if it is less than it's parent node.
   #  It could be **very** helpful for the add method.
-  # Time complexity: ?
-  # Space complexity: ?
+  # Time complexity: O(log n)
+  # Space complexity: O(1)
   def heap_up(index)
-    
+    parent_index = (index - 1) / 2
+
+    unless @store[parent_index].key < @store[index].key || index <= 0 
+      swap(parent_index, index)
+      heap_up(parent_index)
+    end
   end
 
   # This helper method takes an index and 
-  #  moves it up the heap if it's smaller
-  #  than it's parent node.
+  #  moves it down the heap if it's larger
+  #  than its children nodes.
   def heap_down(index)
-    raise NotImplementedError, "Method not implemented yet..."
+    left_index = 2 * index + 1
+    right_index = 2 * index + 2
+
+    return if left_index > @store.length - 1 || right_index > @store.length - 1
+
+    child_index = (@store[left_index].key < @store[right_index].key ? left_index : right_index)
+
+    unless @store[index].key < @store[child_index].key
+      swap(child_index, index)
+
+      heap_down(child_index)
+    end
   end
 
   # If you want a swap method... you're welcome
