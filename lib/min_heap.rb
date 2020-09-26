@@ -57,8 +57,7 @@ class MinHeap
   # Time complexity: O(1)
   # Space complexity: O(1)
   def empty?
-    return true if @store.first.nil?
-    false
+    @store.first.nil?
   end
 
   private

@@ -6,12 +6,13 @@ require_relative './min_heap'
 def heapsort(list)
   return list if list.empty? || list.length == 1
 
-  #like insertion sort...hm!
   heap = MinHeap.new
 
   list.each do |element|
-    heap.add(element.to_s)
+    heap.add(element)
   end
+
+  #then sort it out???
 
   return heap
 end
