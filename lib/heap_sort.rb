@@ -13,10 +13,13 @@ def heapsort(list)
   end
 
   #then sort it out
-  (list.length - 1).times do |i|
+  
+  i = 0
+  
+  while i < list.length
     node = heap.remove_min
     list[i] = node
-    i += 0
+    i += 1
   end
 
   return list
